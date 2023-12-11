@@ -10,6 +10,17 @@
   </head>
   <body>
     <main>
+      <a
+        href="https://github.com/debabrata100/debabrata100.github.io/tree/main/demo-request-idle-callback"
+        id="github-link"
+      >
+        <img
+          heigh="30"
+          width="30"
+          alt="gitgub link"
+          src="./assets/github-mark.png"
+        />
+      </a>
       <h1>
         Demonstration of using cooperatively scheduled background tasks using
         the
@@ -21,12 +32,15 @@
       </div>
       <div class="grid">
         <div class="playground">
+          <span class="playground-text">Playground</span>
           <div class="boxes">
             <li class="box"></li>
           </div>
           <button id="addNew">+</button>
         </div>
         <div class="long-task">
+          <span class="playground-text">Long Task</span>
+          <label>Progress bar</label>
           <div class="progress-bar-container">
             <span class="progressValue" id="progressValue"></span>
             <span class="progress" id="progress"></span>
@@ -37,6 +51,19 @@
             <button id="resume">Resume</button>
           </div>
         </div>
+      </div>
+      <div class="instructions">
+        <li>
+          In the Playground section, click on + button, you will be able to add
+          circles. Now click on start long task in the Long Task section, you
+          will notice playground section is not interactive. Wait for 20s, you
+          will notice progressbar will show 100% at once.
+        </li>
+        <li>
+          Now check the checkbox(Enable requestIdleCallback to make user input
+          responsive) and repeat the above step, you will notice everything is
+          interactive. Even the progressbar start moving.
+        </li>
       </div>
     </main>
   </body>

@@ -6,13 +6,25 @@ main {
   text-align: center;
   padding: 0 10%;
 }
+.long-task {
+  width: 40%;
+}
 .playground {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 60%;
   min-height: 200px;
   border: 1px solid;
   padding: 10px;
+  position: relative;
+}
+.playground .playground-text {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.3;
+  font-weight: bold;
+  top: 46%;
+  left: 43%;
 }
 .boxes {
   display: flex;
@@ -74,9 +86,37 @@ main {
   border: 1px solid;
   padding: 10px;
   box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.long-task .playground-text {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.3;
+  font-weight: bold;
+  top: 46%;
+  left: 38%;
 }
 .control {
   text-align: center;
   font-size: 18px;
   margin-bottom: 16px;
+}
+.instructions {
+  text-align: left;
+  margin-top: 24px;
+  font-size: 20px;
+}
+.instructions li {
+  list-style: none;
+  margin-bottom: 8px;
+}
+.instructions li::before {
+  content: "-";
+}
+#github-link {
+  position: absolute;
+  right: 16px;
 }
