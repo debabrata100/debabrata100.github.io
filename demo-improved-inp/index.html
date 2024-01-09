@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A Demo of requestAnimationFrame and setTimeOut to improve INP(Interaction to Next Paint core web vital)"
+    />
+    <meta name="keywords" content="requestAnimationFrame, setTimeOut, INP" />
+    <title>Improve INP</title>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <h1>
+        A Demo of <code>requestAnimationFrame</code> and
+        <code>setTimeOut</code> to improve INP(Interaction to Next Paint core
+        web vital)
+      </h1>
+      <div>
+        <input type="text" placeholder="type here" id="user-input" />
+        <input type="checkbox" id="toggle-responsive" /> Enable Responsive
+      </div>
+      <div class="search-result">
+        <header>Search Result</header>
+        <ul id="result-list">
+          <li>result</li>
+        </ul>
+      </div>
+      <ul>
+        <h2># references</h2>
+        <li>
+          <a href="https://web.dev/articles/optimize-inp" target="_blank"
+            >https://web.dev/articles/optimize-inp</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame"
+            target="_blank"
+            >https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Instructions</h3>
+      <span
+        >Try typing in input field without enabling responsive, you will find
+        lagging. and inp is high. Now Enable the checkbox and try typing.</span
+      >
+    </div>
+    <h3>Code:</h3>
+    <pre>
+        <code class="code-snippet">
+          var enableResponsiveness = false;
+          !(function () {
+            const userInput = document.getElementById("user-input");
+            document
+              .querySelector("#toggle-responsive")
+              .addEventListener("change", function () {
+                enableResponsiveness = !enableResponsiveness;
+                console.log(enableResponsiveness);
+              });
+    
+            userInput.addEventListener("keyup", function (event) {
+              const value = event.target.value;
+              if (!value) {
+                clearResult();
+              } else {
+                if (!enableResponsiveness) {
+                  printResult(value);
+                  return;
+                }
+                // Use `setTimeout` to defer all other work until at least the next
+                // frame by queuing a task in a `requestAnimationFrame()` callback.
+                requestAnimationFrame(function () {
+                  setTimeout(function () {
+                    printResult(value);
+                  }, 0);
+                });
+              }
+            });
+    
+            function clearResult() {
+              const resultList = document.getElementById("result-list");
+              resultList.innerHTML = "";
+            }
+    
+            function printResult(value) {
+              const resultList = document.getElementById("result-list");
+              for (let i = 0; i < 2; i++) {
+                let start = Date.now();
+                while (Date.now() - start < 100) {
+                  // Simulate a slow task
+                }
+                const li = document.createElement("li");
+                li.innerText = `result ${value} - ${i + 1}`;
+                resultList.appendChild(li);
+              }
+            }
+          })();
+        </code>
+      </pre>
+  </body>
+</html>
